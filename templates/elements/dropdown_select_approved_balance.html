@@ -1,0 +1,10 @@
+<div class="btn-group">
+       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Expenses: {{ approved }}   <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu">
+               <li><a href="{{ request.path }}?approved=all">Expenses: All </a></li>
+               <li><a href="{{ request.path }}?approved=yes">Expenses: Approved </a></li>
+               <li><a href="{{ request.path }}?approved=no">Expenses: Not Approved </a></li>
+       </ul>
+</div>

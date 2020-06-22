@@ -1,0 +1,17 @@
+<div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ year }}  <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {% for y in select_years %}
+                <li>
+                    {% if request.GET.approved %}
+                        <a href="{% url "balance:year" y %}?approved={{ request.GET.approved }}">
+                    {% else %}
+                        <a href="{% url "balance:year" y %}">
+                    {% endif %}
+                    {{ y }} </a>                    
+                </li>
+            {% endfor %}
+        </ul>
+</div>

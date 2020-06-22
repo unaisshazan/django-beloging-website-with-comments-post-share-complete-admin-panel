@@ -1,0 +1,14 @@
+{% load global_tags %}
+<div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ month|intmonth }}  <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {% for m in select_months %}
+                <li>
+                       <a href="{% url "expenses:monthly_all" year m%}?{{ approved_url_args }}&&{{ by_url_args }}">
+                    {{ m|intmonth }} </a>                    
+                </li>
+            {% endfor %}
+        </ul>
+</div>

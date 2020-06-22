@@ -1,0 +1,467 @@
+{% load static from staticfiles %} 
+ <!-- FlatFy Theme - Andrea Galanti /-->
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+<head>
+
+	<title>DivorceCalcs</title>
+	{% include "elements/refs_home_page.html" %}
+    
+
+</head>
+<body id="home">
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div id="status"></div>
+	</div>
+	
+	<!-- FullScreen -->
+	 
+    {% include "elements/login_modal.html" %}
+    
+    <div class="intro-header">
+     <div class="col-xs-11 text-center">
+	{% include "elements/messages.html" %}
+     </div>
+		<div class="col-xs-11 text-right">
+		
+			<a href="#" style="color:white;font-weight:bold;" data-toggle="modal" data-target="#myModal" id="show_sign_in_intro">
+			Sign-in </a>
+		</div>
+		<div class="col-xs-12 text-center abcen1">
+			
+			<h1 class="h1_home wow fadeIn" data-wow-delay="0.4s">Divorce Calcs</h1>
+			<h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">An easy, calm way to manage expenses between divorced parents </h3>
+			<ul class="list-inline intro-social-buttons">
+				<li><a href=" {% url "sign_up_simple" %} " 
+				class="btn  btn-lg mybutton_cyano wow fadeIn" data-wow-delay="0.8s"><span class="network-name">Sign-Up</span></a>
+				</li>
+				<li id="download" >
+				<a href="{% url 'demo_account' %}" class="btn  btn-lg mybutton_standard wow swing wow fadeIn" data-wow-delay="1.2s">
+				<span class="network-name">See Demo Now</span>
+				</a>
+				</li>
+			</ul>
+		</div>    
+        <!-- /.container -->
+		<div class="col-xs-12 text-center abcen wow fadeIn">
+			<div class="button_down "> 
+				<a class="imgcircle wow bounceInUp" data-wow-duration="1.5s"  href="#whatis"> <img class="img_scroll" src="{% static 'lib/img/icon/circle.png' %}" alt=""> </a>
+			</div>
+		</div>
+    </div>
+	
+	<!-- NavBar-->
+	<nav class="navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			<a class="navbar-brand" href="#home">Divorce Calcs</a>
+		</div>
+
+		<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+			
+				<li class="menuItem"><a href="{% url 'sign_up_simple' %}" class="btn navbar-btn btn-danger" style="color:white;" role="button" id="sign_up">Sign-Up</a></li>
+				<li class="menuItem"><a href="#whatis">Benefits</a></li>
+				<li class="menuItem"><a href="#useit">Use It</a></li>
+				<li class="menuItem"><a href="#screen">Screenshots</a></li>
+				<li class="menuItem"><a href="#credits">Features</a></li>
+				<li class="menuItem"><a href="#contact">About</a></li>
+				<li class="menuItem"><a href="{% url 'login_simple' %}">Sign-In</a></li>
+			</ul>
+		</div>
+		   
+		</div>
+	</nav> 
+	
+	<!-- What is -->
+	<div id="whatis" class="content-section-b" style="border-top: 0">
+		<div class="container">
+
+			<div class="col-md-6 col-md-offset-3 text-center">
+				<h2>Benefits</h2>
+				<p class="lead" style="margin-top:0"> An easy & calm way to manage  shared expenses</p>
+				
+			</div>
+			
+			<div class="row">
+			
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img class="rotate" src="{% static 'lib/img/icon/bank.svg' %}" alt="Generic placeholder image">
+				  <h3>Fair Expenses Sharing</h3>
+				  <p class="lead">You can easily track your shared expenses, 
+				  and log expenses with a clean, simple web interface.
+				  Easier to remember and balance your shared expenses.
+				  </p>
+
+				  <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
+				</div><!-- /.col-lg-4 -->
+				
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img  class="rotate" src="{% static 'lib/img/icon/tactics.svg' %}" alt="Generic placeholder image">
+				   <h3>Calm Communication</h3>
+				   <p class="lead">The most important thing is to not let an argument about an expense 
+				   to explode into hostility. 
+				   See your divorcee expenses, approve what you agree to participate in, and vice versa.
+				  
+				   
+				   </p>
+				   <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
+				</div><!-- /.col-lg-4 -->
+				
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img  class="rotate" src="{% static 'lib/img/icon/calendar.svg' %}" alt="Generic placeholder image">
+				   <h3>Closing Things</h3>
+					<p class="lead">
+					Each month you and your divorcee clear a month. The expenses for this month are locked, and closed. 
+					So you don't need to nagotiate and re-open past issues.
+					</p>
+				  <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
+				</div><!-- /.col-lg-4 -->
+				
+			</div><!-- /.row -->
+				
+			<div class="row tworow">
+			
+				<div class="col-sm-4  wow fadeInDown text-center">
+				  <img class="rotate" src="{% static 'lib/img/icon/watch.svg' %}" alt="Generic placeholder image">
+				  <h3>Take Your Time</h3>
+				  <p class="lead">
+				  With DivorceCalcs you can watch your divorcee expenses and consider, check and respond,
+				  in your own time.
+				 
+				  </p>
+				 <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
+				</div><!-- /.col-lg-4 -->
+				
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img  class="rotate" src="{% static 'lib/img/icon/browser.svg' %}" alt="Generic placeholder image">
+				   <h3>Financial Responsibility</h3>
+				   <p class="lead">Raising children requires good financial management,
+				   which is not trivial even for married couples. Divorced parents need a dedicated tool, designed for their needs.
+				  
+				   </p>
+				   <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
+				</div><!-- /.col-lg-4 -->
+				
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img  class="rotate" src="{% static 'lib/img/icon/search.svg' %}" alt="Generic placeholder image">
+				   <h3>Stay Updated</h3>
+				 <p class="lead">
+				 Keeping tabs on expenses during the month, instead of accumulating shared expenses
+				 which you have to pay but didn't know about
+				 </p>
+				  <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
+				</div><!-- /.col-lg-4 -->
+				
+			</div><!-- /.row -->
+		</div>
+	</div>
+	
+	<!-- Use it -->
+    <div id ="useit" class="content-section-a">
+
+        <div class="container">
+			
+            <div class="row">
+			
+				<div class="col-sm-6 pull-right wow fadeInRightBig" >
+                    <img class="img-responsive img-rounded " src="{% static  'lib/img/invoices.png' %}" alt="">
+                </div>
+				
+                <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">   
+                    <h3 class="section-heading">Works the way divorced parents need</h3>
+					<div class="sub-title lead3">Designed for remote management of shared expense 
+					</div>
+                    <p class="lead">
+						DivoceCalcs works for the divorced situation. 
+						The parents don't need, and usualy can't, share 
+						and communicate expenses daily.
+						
+						<br>  With DivorceCalcs,  each one logs and track his or her expenses.
+						You see and approve your divorcee expenses in your own time, and balance these expenses 
+						month by month.
+					</p>
+
+					 
+				</div>   
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+
+    
+
+   
+
+	<!-- Screenshot -->
+	<div id="screen" class="content-section-b">
+        <div class="container">
+          <div class="row" >
+			 <div class="col-md-6 col-md-offset-3 text-center wrap_title ">
+				<h2>Screenshots</h2>
+				<p class="lead" style="margin-top:0">A Clean & Simple Tool</p>
+			 </div>
+		  </div>
+		    <div class="row wow bounceInUp" >
+              <div id="owl-demo" class="owl-carousel">
+				
+				
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'expenses_list.png' %}" alt="Owl Image">
+					</div>
+					
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'expense_details.png' %}" alt="Owl Image">
+					</div>
+					
+					
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'balance.png' %}" alt="Owl Image">
+					</div>
+					
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'expenses_list.png' %}" alt="Owl Image">
+					</div>
+					
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'approve_expense.png' %}" alt="Owl Image">
+					</div>
+					
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'clear_month.png' %}" alt="Owl Image">
+					</div>
+					
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{% static 'side_bar.png' %}" alt="Owl Image">
+					</div>
+				
+				
+               
+				
+				
+				
+				
+				
+               
+				
+				
+              </div>       
+          </div>
+        </div>
+
+
+	</div>
+	
+	<div  class="content-section-c ">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-center white">
+				<h2>Get Hold of Your Shared Expenses</h2>
+				<p class="lead" style="margin-top:0">easy, clear and accurate</p>
+			 </div>
+			<div class="col-md-6 col-md-offset-3 text-center">
+				<div class="mockup-content">
+				
+						<div class="morph-button wow pulse morph-button-inflow morph-button-inflow-1">
+							<button type="button" onclick="window.location.href='{% url 'sign_up_simple' %}';">
+								Sign-Up Now
+							</button>
+							
+						</div>
+				</div>
+			</div>	
+			</div>>
+		</div>
+	</div>	
+	
+	<!-- Credits -->
+	<div id="credits" class="content-section-a">
+		<div class="container">
+			<div class="row">
+			
+			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>Features</h2>
+				<p class="lead" style="margin-top:0">One place to log and track your shared expenses</p>
+			 </div>
+			 
+				<div class="col-sm-6  block wow bounceIn">
+					<div class="row">
+						<div class="col-md-4 box-icon rotate"> 
+							<i class="fa fa-desktop fa-4x "> </i> 
+						</div>
+						<div class="col-md-8 box-ct">
+							<h3> Log Expenses </h3>
+							<p> Enter expenses. Add purchase details, and the expected divorcee participation </p>
+						</div>
+				  </div>
+			  </div>
+			  <div class="col-sm-6 block wow bounceIn">
+					<div class="row">
+					  <div class="col-md-4 box-icon rotate"> 
+						<i class="fa fa-pencil fa-4x "> </i> 
+					  </div>
+					  <div class="col-md-8 box-ct">
+						<h3>Approve Expenses </h3>
+						<p> Each divorcee can review and approve the other divorcee expense, and commit to participate.</p> 
+					  </div>
+					</div>
+			  </div>
+		  </div>
+		  
+		  <div class="row tworow">
+				<div class="col-sm-6  block wow bounceIn">
+					<div class="row">
+						<div class="col-md-4 box-icon rotate"> 
+							<i class="fa fa-calendar fa-4x "> </i> 
+						</div>
+						<div class="col-md-8 box-ct">
+							<h3> Monthly Balance </h3>
+							<p> After a month finished, clear the monthly balance. Once balanced,
+							DivorceCalcs prevents further changes to this month expenses.
+							Use the month's summary to pay each other for that month</p>
+						</div>
+				  </div>
+			  </div>
+			  <div class="col-sm-6 block wow bounceIn">
+					<div class="row">
+					  <div class="col-md-4 box-icon rotate"> 
+						<i class="fa fa-list-alt fa-4x "> </i> 
+					  </div>
+					  <div class="col-md-8 box-ct">
+						<h3>Reports & History</h3>
+						<p> Clear summary of expenses by month, with summaries by month, divorcee and approved or non approved expenses</p> 
+					  </div>
+					</div>
+			  </div>
+		  </div>
+		</div>
+	</div>
+	
+	<!-- Banner Download -->
+	<div id="downloadlink" class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>It's Free</h2>
+				<p class="lead" style="margin-top:0">Manage your shared expenses in an easy and calm way</p>
+				<p><a class="btn btn-embossed btn-danger view" role="button">Sign-Up Now</a></p> 
+			 </div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Contact -->
+	<div id="contact" class="content-section-a">
+		<div class="container">
+			<div class="row">
+			
+			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>About Us</h2>
+				<p class="lead" style="margin-top:0">DivorceCalcs.com</p>
+			</div>
+			
+			
+			
+			<hr class="featurette-divider hidden-lg">
+				<div class="col-md-5 col-md-push-1 address">
+					
+					
+					<h3>Made by Aviah Laor</h3>
+					<img src="{% static 'aviah.png' %}" class="img-rounded" height=180>
+					<address>
+					Address:  P.O.Box 521, Nes Ziona, IL<br>
+					Phone: 972-585-585-007<br>
+					Mail: aviahl at gmail dot com </p>
+					</address>
+
+					
+					<li class="social"> 
+					<a href="https://twitter.com/aviahlaor"><i class="fa  fa-twitter-square fa-size"> </i> </a> 
+					<a href="https://www.facebook.com/aviah"><i class="fa fa-facebook-square fa-size"> </i></a>
+					</li>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h3 class="footer-title"></h3>
+            <p>
+            </p>
+			
+			<!-- LICENSE -->
+			<a rel="cc:attributionURL" href="http://www.andreagalanti.it/flatfy"
+		   property="dc:title">Flatfy Theme </a> by
+		   <a rel="dc:creator" href="http://www.andreagalanti.it"
+		   property="cc:attributionName">Andrea Galanti</a>
+		   <a  href="http://andreagalanti.it" target="_blank">andreagalanti.it</a>
+		   is licensed to the public under 
+		   <BR>the <a rel="license"
+		   href="http://creativecommons.org/licenses/by-nc/3.0/it/deed.it">Creative
+		   Commons Attribution 3.0 License - NOT COMMERCIAL</a>
+		   
+		   
+	   
+          </div> <!-- /col-xs-7 -->
+
+          <div class="col-md-5">
+            <div class="footer-banner">
+              <h3 class="footer-title">DivorceCalcs.com</h3>
+	      <a href="{% url 'tos_public' %}"> Terms of Service </a><br>
+	      <a href="{% url 'privacy_policy_public' %}"> Privacy Policy </a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    
+    
+	<script src="{% static 'lib/js/owl.carousel.js' %}"></script>
+	<script src="{% static 'lib/js/script.js' %}"></script>
+	<!-- StikyMenu -->
+	<script src="{% static 'lib/js/stickUp.min.js' %}" %}></script>
+	<script type="text/javascript">
+	  jQuery(function($) {
+		$(document).ready( function() {
+		  $('.navbar-default').stickUp();
+		  
+		  
+		  $('body').append('<span id="page_id" page_id="{% block page_id %}home_page{% endblock page_id %}" style="display:none;"></span>');
+		});
+	  });
+	
+	</script>
+	<!-- Smoothscroll -->
+	
+	<script src="{% static 'lib/js/wow.min.js' %}"></script>
+	<script>
+	 new WOW().init();
+	</script>
+	<script src="{% static 'lib/js/classie.js' %}"></script>
+	<script src="{% static 'lib/js/uiMorphingButton_inflow.js' %}"></script>
+	<!-- Magnific Popup core JS file -->
+	<script src="{% static 'lib/js/jquery.magnific-popup.js' %}"></script> 
+</body>
+
+</html>

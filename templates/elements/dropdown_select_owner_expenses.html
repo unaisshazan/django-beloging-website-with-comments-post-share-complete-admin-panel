@@ -1,0 +1,10 @@
+<div class="btn-group">
+       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ by }}   <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu">
+               <li><a href="{{ request.path }}?by=all&&{{ approved_url_args }}">By All</a></li>
+               <li><a href="{{ request.path }}?by=my&&{{ approved_url_args }}"> My </a></li>
+               <li><a href="{{ request.path }}?by=divorcee&&{{ approved_url_args }}"> Divorcee </a></li>
+       </ul>
+</div>

@@ -1,0 +1,25 @@
+{% load global_tags %}
+<nav>
+  <ul class="pagination">
+    {% if page.has_previous %}
+      <li>
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+      </li>
+    {% endif %}
+        
+    {% for p in pages %}
+        <li><a href="{{ request.get_full_path|add_page_arg:p }}"> {{p}} </a></li>
+      {% endfor %}
+    
+    {% if page.has_next %}
+      <li>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+    
+  </ul>
+</nav>

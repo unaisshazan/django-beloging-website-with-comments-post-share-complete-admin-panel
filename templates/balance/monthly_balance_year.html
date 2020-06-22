@@ -1,0 +1,71 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+{% load global_tags %}
+
+{% block sidebar_item %} "balance" {% endblock sidebar_item %}
+{% block page_title %} Months Balance  {% endblock page_title %}
+
+{% block page_nav %} 
+    
+    
+   {% include "elements/dropdown_select_year_balance.html" %} 
+   {% include "elements/dropdown_select_approved_balance.html" %}
+
+{% endblock page_nav %}
+
+{% block main_content %}
+
+    <table class="table table-hover">
+        <tr>
+        
+            <th> Month </th>
+             <th> My Expenses </th>
+              <th> Divorcee Participate </th>
+              <th> Divorcee Expenses </th>
+              <th> My Participate </th>
+              <th> My Net </th>
+              <th> Divorcee Net </th>
+               <th> Total Expenses </th>
+               <th> Status </th>
+              
+        </tr>
+        {% for balance in object_list %}
+            <tr>
+            
+                <td>
+                    <a href="{{ balance.balance_object.get_absolute_url }}?approved=yes"> {{  balance.month_of_balance|intmonth }} </a>
+                </td>
+                <td>
+                {% if balance.user_sum > 0 %}
+                    <a href="{% url "expenses:monthly_all"  year balance.month_of_balance  %}?by=my"> 
+                        {{  balance.user_sum|currencyformat }} 
+                    </a>
+                {% else %} 0 {% endif %}
+                    
+                </td>
+                <td>{{  balance.divorcee_participate|currencyformat }} </td>
+                <td>
+                    {% if balance.divorcee_sum > 0 %}
+                    <a href="{% url "expenses:monthly_all"  year balance.month_of_balance  %}?by=divorcee">
+                        {{  balance.divorcee_sum|currencyformat }} 
+                    </a>
+                    {% else %} 0 {% endif %}
+                    </td>
+                <td>{{  balance.user_participate|currencyformat }} </td>
+                <td>{{  balance.user_net|currencyformat }} </td>
+                <td>{{  balance.divorcee_net|currencyformat }} </td>
+                <td>
+                    {% if balance.total > 0 %}
+                        <a href="{% url "expenses:monthly_all"  year balance.month_of_balance %}">
+                            {{  balance.total|currencyformat }}
+                        </a>
+                     {% else %} 0 {% endif %}
+                </td>
+                <td>  {{  balance.cleared|striftrue:"Cleared" }}  </td>
+                
+            </tr>
+        
+        {% endfor %}
+    </table>
+
+{% endblock main_content %}

@@ -1,0 +1,53 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+
+{% block sidebar_item %} "settings" {% endblock sidebar_item %}
+{% block page_title %} Enter password to change settings{% endblock page_title %} 
+
+{% block ready_script %} 
+    {{ block.super }}
+
+$("#send").on("click",function(){
+                                $.ajax(
+                                        {type:"POST",
+                                        url: "{% url 'users:auth_user_ajax' %}",
+                                        data: {"password":$("#password").val()},
+                                        global: false,
+                                        success: function(data){
+                                                        if (data['password']=='success'){ 
+                                                                                                    $("#password_success").show();
+                                                                                                    $("#password_fail").hide();}
+                                                                                                    else {
+                                                                                                    $("#password_success").hide();
+                                                                                                    $("#password_fail").show();}
+                                                                },
+                                     error: function (){}
+                                   });
+                });
+    
+    
+{% endblock %}
+
+{% block main_content %}
+
+<div class="col-xs-6">
+<div style="margin-bottom:20px;">
+<h4> Enter Password: </h4>
+<input id="password" name="password" type="password" class="form-control">
+
+<br>
+<button id="send" class="btn btn-primary"> Send </button>
+</div>
+
+<div id="password_success" style="display:none;">
+<div class="alert alert-info" role="alert">Password Verified!</div>
+<a href="{% url 'users:user_settings'%}" class="btn btn-success" role="btn"> Go to settings page </a>
+</div>
+
+<div id="password_fail" style="display:none;">
+<div class="alert alert-danger" role="alert">Password failed, try again</div>
+</div>
+
+
+</div>
+{% endblock main_content %}

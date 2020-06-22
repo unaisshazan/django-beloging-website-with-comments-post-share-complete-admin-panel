@@ -1,0 +1,115 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+{% load global_tags %}
+
+{% block sidebar_item %} "expenses" {% endblock sidebar_item %}
+{% block page_title %} Monthly Expenses {% endblock page_title %}
+{% block page_id %}expenses_month{% endblock page_id %}
+{% block page_nav %} 
+
+    {% include "elements/dropdown_select_owner_expenses.html" %}
+    {% include "elements/dropdown_select_approved_expenses.html" %}
+    {% include "elements/dropdown_select_month_expenses.html" %} 
+    {% include "elements/dropdown_select_year_expenses.html" %}
+    <button class="btn btn-primary save" id="save_approve_change" style="display:none;"> Save </button>
+    
+    <button class="btn btn-success save" id="save_approve_success" style="display:none;"> Saved </button>
+    
+    {% if locked_expenses %}
+        <a href="{{ balance_url }}?approved=yes" class="btn btn-info"> This month is balanced</a> 
+    {% endif %}
+    
+{% endblock page_nav %}
+
+
+
+{% block ready_script %} 
+    {{ block.super }}
+    $(":checkbox").on("click",function(){
+            $("#save_approve_change").show();});
+            
+    $("#save_approve_change").on("click",function(){
+        
+            checkboxes = $("#expenses_table").find(":checkbox");
+            response = {};
+            checkboxes.each(function(){
+                  response[$(this).attr("expense_id")] = $(this).checked;         
+            });
+           for (m=0;m<checkboxes.length;++m)
+                        {response[checkboxes[m].getAttribute("expense_id")] = checkboxes[m].checked;}
+                   
+             $.ajax(
+                    {type:"POST",
+                      url: "{% url 'expenses:expenses_multi_approve' %}",
+                      data: response,
+                      global: false,
+                      success: function(){
+                                $("#save_approve_change").hide();
+                                $("#save_approve_success").show();
+                                setTimeout(function(){
+                                             $("#save_approve_success").hide();
+                                                    }, 1000);
+                       
+                        },
+                      error: function (){}
+            });
+    
+            
+    
+    });
+    
+    
+{% endblock ready_script %} 
+
+
+
+
+
+
+{% block main_content %}
+    
+    
+    <table class="table table-hover" id="expenses_table">
+        <tr>
+            
+            <th> Description </th>
+             <th> Purchased By </th>
+            <th> Amount </th>
+            <th> Divorcee Participate </th>    
+            <th> Date Purchased </th>
+            <th> Approved? </th>
+        </tr>
+            
+        {% for expense in object_list %}
+            <tr>
+                                
+                <td> <a href=" {{ expense.get_absolute_url }}"> {{ expense.desc }} </a> </td>
+                <td> {{ expense.owner.username }} </td>
+                <td> {{ expense.expense_sum|currencyformat }} </td>
+                <td> {{ expense.expense_divorcee_participate }}% </td>  
+                
+                <td> {{ expense.date_purchased|date_format }} </td>
+                <td>
+                  
+                                     
+                    {% if expense.owner != request.user and not locked_expenses %}
+                            <input type="checkbox"  expense_id="{{ expense.id }}" {{ expense.is_approved|striftrue:"checked"}} >
+                    {% else %}
+                    
+                           {% if expense.is_approved %} 
+                               <span  class="glyphicon glyphicon-ok"  aria-hidden="true" approved="true"></span>
+                           {% else %}
+                               <span approved="false"> - </span>
+                           {% endif %}
+                        
+                    {% endif %}
+                
+                </td>
+            </tr>
+        
+       {% endfor %}
+              
+    </table>
+
+{% endblock main_content %}
+

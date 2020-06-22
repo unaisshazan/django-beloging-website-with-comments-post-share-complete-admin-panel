@@ -1,0 +1,38 @@
+{% load static from staticfiles %}
+
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title> {% block title %} {{ page_title }} {% endblock title %}</title>
+        {% include "elements/refs_base.html" %}
+        {% block additional_refs %} {% endblock additional_refs %}
+        <script> 
+                $(function() {
+                        $('body').append('<span id="page_id" page_id="{% block page_id %}base{% endblock page_id %}" style="display:none;"></span>');
+                        {% block ready_script %} {% endblock ready_script %}
+                });                
+        </script>
+        <style type="text/css"> {% block embeded_style %} {% endblock embeded_style %} </style>
+
+    </head>
+
+
+
+    <body>
+    
+        <nav class="navbar navbar-default bavbar-fixed-top">
+            <div class="container-fluid">
+                {% block top_nav %} {% endblock top_nav %}
+            </div>
+        </nav>
+    
+        {% block body %} {% endblock body %}
+            
+    </body>
+
+
+</html>

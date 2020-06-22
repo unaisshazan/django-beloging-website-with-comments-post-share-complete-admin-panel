@@ -1,0 +1,27 @@
+{% extends "base_login.html" %}
+
+
+
+{% block sidebar_item %} "none" {% endblock sidebar_item %}
+{% block page_title %} Search Results for "{{ request.GET.q }}" {% endblock page_title %}
+
+
+{% block main_content %}
+
+    {% if object_list %}
+    
+        {% for item in object_list %}
+            
+            <p> <a href="{{ item.object.get_absolute_url }}"> {{ item.name }} </a> </p>
+        
+        
+        {% endfor %}
+    
+    
+    {% else %}
+        <p> No matches found </p>
+    {% endif %}
+
+
+
+{% endblock main_content %}

@@ -1,0 +1,14 @@
+{% extends "base_public.html" %}
+{% load static from staticfiles %}
+
+
+{% block main_content %}
+<div class="col-xs-4">
+    <form action='' method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p> Note: You can use your username or email </p>
+    <input type="submit" value="Login" class="btn btn-primary btn-lg"> </form>
+</div>
+
+{% endblock main_content %}

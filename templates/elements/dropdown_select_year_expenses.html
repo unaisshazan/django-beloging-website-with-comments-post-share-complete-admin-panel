@@ -1,0 +1,13 @@
+<div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ year }}  <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {% for y in select_years %}
+                <li>
+                        <a href="{% url "expenses:monthly_all" y month %}?{{ approved_url_args }}&&{{ by_url_args }}">
+                    {{ y }} </a>                    
+                </li>
+            {% endfor %}
+        </ul>
+</div>

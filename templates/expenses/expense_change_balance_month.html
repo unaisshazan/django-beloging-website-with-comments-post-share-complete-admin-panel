@@ -1,0 +1,26 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+{% load global_tags %}
+
+{% block sidebar_item %} "expenses" {% endblock sidebar_item %}
+{% block page_title %} Change Expense Month to Balance{% endblock page_title %} 
+
+{% block main_content %}
+    
+   {{ model_html.styled }}
+   <h4> <span class="label label-info p-r-10"> Approval Status </span>
+   <span class="panel panel-default" style="border:none;padding-left:10px;">
+      {% if expense.is_approved %} Approved {% else %}  Pending {% endif %} 
+   </span>
+   
+   </h4>
+    
+    
+    <form action='' method="POST" class="col-xs-2">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="{{ expense.get_absolute_url }}" class="btn btn-danger" role="button"> Cancel </a>
+    <input type="submit" value="Save" class="btn btn-success save"> </form>
+    
+
+{% endblock main_content %}

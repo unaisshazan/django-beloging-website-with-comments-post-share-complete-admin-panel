@@ -1,0 +1,135 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+
+{% block sidebar_item %} "how-to" {% endblock sidebar_item %}
+{% block page_title %}How To & Intro{% endblock page_title %} 
+
+{% block main_content %}
+
+{% if request.user.divorcee %}
+<div style="font-size:large;">
+<h3 ><span class="label label-primary"> At a Glance </span></h3>
+<p> You, and your divorcee, enter your expenses. 
+    <br> <span class="info">Try to log an expense as soon as possible, so you don't forget it! </span></p>
+
+<p> <br> Log & Approve Expenses:</p>
+<ol >
+    
+    <li> When any of you add an expense, you can see it in the expenses list. </li>
+    <li> Review your divorcee expenses throuout the month </li>
+    <li> If you agree to participate in a divorcee expense: approve it </li>
+    <li> Once an expense is approved, it can't be changed </li>
+    
+</ol>
+<p> <br> Balance a Month:</p>
+<ol>    
+    
+    <li> When a new month starts, you can balance the previous month. </li>
+    <li> To balance a month, review the month summary. If you agree, mark it as "clear". </li>
+    <li> After the month is cleared, no further changes can be made to this month expenses </li>
+    <li> You and your divorcee can now pay each other the difference in expenses, by the monthly balance summary </li>
+</ol>
+
+<p style="font-size:large;"> 
+Continue to log expenses for current and following months.
+</p>
+
+{% else %}
+
+Currently you are registered on your own. Add expenses where you want your divorcee to participate. When you add an epxense, 
+you can see it in the expenses list, and the monthly balance summary.
+
+At the end of each month, you will have a clean, simple list of all the expenses that your divorcee should participate,
+so you don't forget or miss one. 
+
+<div class="panel panel-primary" >
+  <div class="panel-heading">
+    <h3 class="panel-title">DivorceCalcs for the two divorced parents</h3>
+  </div>
+  <div class="panel-body" >
+    When the two parents use the site: <br>
+    <ol>
+    <li>Each of you can see and the other parent expenses throughout the month</li>
+    <li> Each parent can approve the other parent expense when agree to participate </li>
+    <li> At the end of the month you automaticaly get a balance summary for the total month </li>
+    <li> This balance shows how shared expenses split, specificaly, how approved expenses split </li>
+    </ol>
+  So in one click, and no hustle, you both know your share of the total monthly shared expenses.
+  </div>
+  <div class="panel-footer">To invite divorcee to manage shared expenses, invite to sign up to DivorceCalcs, <br>with your account code: 
+{{  request.user.account.account_code }}  
+  </div>
+</div>
+
+{% endif %}
+
+<h3> <span class="label label-primary">Expenses</span></h3>
+<p> <span class="label label-info p-r-10"> Add expense </span> Click the "Add expense" button on the top bar <p>
+<p> <span class="label label-info p-r-10">Expenses List </span> Click on the Expenses tab on the right-side bar </p>
+<ul class="nav nav-pills nav-stacked">
+      <li role="presentation" id="sidebar-expenses">
+            <a href="{% url 'expenses:main_redirect' %}">
+              <span class="glyphicon glyphicon-usd" style="padding-right:15px;" aria-hidden="true"></span> Expenses
+            </a>
+          </li>
+        </ul>
+<p>
+This will take you to the main expenses list.<br>
+You  can filter by year, month, approved or not approved expenses, or
+expenses by you (or your divorcee, if you both signed up).
+<br>
+<p> <span class="label label-info p-r-10"> Edit Expense </span></p>
+<ul>
+<li>Click an expense to see it's details. </li>
+<li> If it's your expense, you will be able to edit or delete the expense.</li>
+<li> If it's a divorcee expense, you can approve or not approve it.</li>
+<li> Once an expense is approved, it can't be changed. </li>
+</ul>
+
+</p>
+
+<h4> <span class="label label-info p-r-10"> Balance Expenses </span> Each expense has a "month to balance" and "year to balance". If this month was balanced, e.g. Jan,2016, then 
+no further changes can be made to this month. <br>
+<br>
+
+<p> <span class="label label-info p-r-10">  If you have  <span style="font-weight=bold;"> an unapproved </span> 
+expense in a balanced month </span> you can move it
+to another month. But you will not be able to edit or change the expense, as long as it's balanced month/year are of a cleared month</h4>
+
+</p>
+
+<h3> <span class="label label-primary">Balance a Month </span></h3>
+
+<p>Click on the Monthly Balance, on the right-side bar </p>
+
+                <a href="{% url 'balance:main_redirect' %}"> 
+                    <span  class="glyphicon glyphicon-calendar" style="padding-right:15px;" aria-hidden="true"></span>Monthly Balance 
+                </a>
+           
+
+<p>You will see a list of the months that has at least one expense.</p>
+
+<p><span class="label label-info p-r-10">  Expenses Summary </span>  Each row shows the summary of expenses for
+each month </p>
+
+<p><span class="label label-info p-r-10">  Clear Monthly Balance </span> Click on a month to see the month
+details. Once the month finished, you can clear it. </p>
+
+<p><span class="label label-info p-r-10">  Drill Down Expenses </span> 
+Click on any expense summary to see the detailed expenses list for for that summary </p>
+
+
+<h3> <span class="label label-primary">Email, Password and User Settings</span> </h3>
+
+<p> Click on the "Settings" on the right-side bar: </p>
+
+
+                <a href="{% url 'users:main_settings_redirect' %}">
+                   <span class="glyphicon glyphicon-user" style="padding-right:15px;" aria-hidden="true"></span>  Settings 
+                </a>
+
+<h3> <span class="label label-primary">Support, Suggestions, Feedback </span> </h3>
+please cotact us
+</div>
+{% endblock main_content %}
+

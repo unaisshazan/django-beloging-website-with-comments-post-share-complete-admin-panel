@@ -1,0 +1,3 @@
+// add this snippet in the   $(function(){...}) script, in the base template
+// then set the block page_id in each page, with a unique pag_id
+$('body').append('<span id="page_id" page_id="{% block page_id %}base{% endblock page_id %}" style="display:none;"></span>');

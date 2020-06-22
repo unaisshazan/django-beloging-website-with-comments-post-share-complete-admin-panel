@@ -1,0 +1,13 @@
+{% load global_tags %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+        {% if message.tags %}
+            <li  class="{{ message.tags }} {{ message.level|django_to_bootstrap_message_class }}" style="color:black;">
+                {{ message }}
+            </li>
+        {% endif %}
+    
+    {% endfor %}
+</ul>
+{% endif %}

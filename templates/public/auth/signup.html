@@ -1,0 +1,68 @@
+{% extends "base_public.html" %}
+{% load static from staticfiles %}
+
+{% block ready_script %}
+ {{ block.super }}
+ $("#sign_up_form").on("submit",function(){
+    if ($("#agree_tos:checked").length<1){$("#agree_to_message").show();return false;} 
+ });
+ 
+ $("#agree_tos").on("click",function(){
+      if ($("#agree_tos:checked").length>0){$("#agree_to_message").hide();} 
+ });
+ {% endblock ready_script %}
+ 
+ {% block page_id %} sign_up {% endblock page_id %}
+ 
+{% block main_content %}
+
+<div class="col-xs-6">
+    <form action='' method="POST" id="sign_up_form">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Sign Up" class="btn btn-primary btn-lg"> </form>
+    
+    
+
+
+  <label>
+    <input id="agree_tos" type="checkbox" value="" checked >
+    I agree to the <a href="{% url 'tos_public' %}" style="color:blue;margin-up:5px;"> Terms of Service </a>
+  </label>
+  <p  id="agree_to_message" style="color:red;display:none;"> Pleas agree to the terms of service </p>
+
+    
+    
+</div>
+<div class="col-xs-1"></div>
+<div class="col-xs-4">
+
+  <div class="panel panel-body panel-info" style="border:none;">
+  <div class=" panel-heading">
+    <h3 class="panel-title"> DivorceCalcs on your own</h3>
+  </div>
+  <div class="panel-footer">
+     <span style="font-weight:bolder;"> Account Code is not required </span><br>
+    Simply track your shared expenses, and what your divorcee should pay you
+  </div>
+</div>
+
+<div class="panel panel-body panel-info" style="border:none;">
+  <div class=" panel-heading">
+    <h3 class="panel-title"> DivorceCalcs for both parents</h3>
+     
+  </div>
+  <div class="panel-footer">
+  <span style="font-weight:bolder;">
+    Account Code: The first parent signs-up, gets the account code, and invites the other parent with this code
+  </span> 
+     <div><span class="glyphicon glyphicon-ok" style="padding-right:3px;" aria-hidden="true"></span> Each parent logs his/her own expenses </p>
+    <p> <span class="glyphicon glyphicon-ok" style="padding-right:3px;" aria-hidden="true"> Each parent watch and approve the other parent expenses </p>
+    <p> <span class="glyphicon glyphicon-ok" style="padding-right:3px;" aria-hidden="true"> Every month a balance of mutual expenses is calculated </p>
+  
+  </div>
+</div>
+</div>
+
+
+{% endblock main_content %}

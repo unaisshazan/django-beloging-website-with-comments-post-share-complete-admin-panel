@@ -1,0 +1,14 @@
+{% load global_tags %}
+<h4> <span class="label label-info p-r-10"> Pay </span></h4>
+<h4>
+{% if request.user.divorcee %}
+    {% if pay > 0 %}
+        I have to pay {{ user.divorcee.username }} {{ pay|currencyformat }}
+    {% else %}    
+        {{ user.divorcee.username }}  has to pay me {{ pay|abs_value|currencyformat }}
+    {% endif %}
+{% else %}
+    When two divorcees use DivorceCalcs.com, you can see how much to pay each other to balance a month.
+    <br> <br> Invite a divorcee by mail, with your account code (visible at your settings page).
+{% endif %}
+</h4>

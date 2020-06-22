@@ -1,0 +1,1 @@
+default_app_config = 'site_repo.apps.users.apps.UsersAppConfig'

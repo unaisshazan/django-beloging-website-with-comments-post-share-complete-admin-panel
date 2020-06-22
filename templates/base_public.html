@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+
+{% block additional_refs %}
+<link href="{% static 'lib/css/style.css' %}" rel="stylesheet">
+{% endblock additional_refs %}
+
+{% block ready_script %}
+
+style_elements()
+{% endblock ready_script %} 
+
+
+        {% block top_nav %}
+                {% include "elements/navbar_public.html" %}
+        {% endblock top_nav %}
+        
+
+{% block body %}
+
+
+
+
+    {% block main_content %}{% endblock main_content %}
+    
+{% endblock body %}

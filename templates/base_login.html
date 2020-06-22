@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block ready_script %}
+    {{ block.super }}
+    
+    {% if DEMO %}    
+        $('.save').on('click',function(event){
+        event.preventDefault();
+        alert("Demo account can only view data. Sign-up for free to get your own account");
+            });    
+    {% endif %}
+    
+                    var csrftoken = getCookie('csrftoken');
+                    $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                       
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        
+                    }
+                });
+    set_sidebar({% block sidebar_item %} "expenses" {% endblock sidebar_item %});
+    $(".dropdown-menu > li ").on("click",update_bootstrap_dropdown_button_by_selection);
+    $("#searchGo").on("submit",function(){
+            q=$('#search_query')[0].value;
+            url = {% url 'search_view' %}+"?q=" + q;
+            if (q.length>0){document.location=url;}
+            return false;
+            });
+            style_elements();
+{% endblock ready_script %}
+
+
+{% block top_nav %}
+
+        {% if DEMO %}
+        <a href="{% url 'sign_up_simple' %}" class="btn navbar-btn btn-danger navbar-left" style="color:white;font-weight:bold;" role="button">
+            Sign-Up for Free!
+        </a>
+        
+        {% endif %}
+
+       <p class="navbar-text navbar-right" style="padding-right:10px;"> 
+       {% if DEMO %}
+             Demo Account: John (divorcee Ashley)
+        {% else  %}
+            Signed in: {{ request.user.username }} 
+        {% endif %}
+       </p>
+        <a href="{% url 'logout_simple' %}" class="btn navbar-btn btn-default navbar-right" id="logout"> Logout </a> 
+        <a href="{% url 'expenses:add' %}" class="btn navbar-btn btn-default navbar-right" id="add_expense">
+            <span  class="glyphicon glyphicon-plus" style="padding-right:5px;" aria-hidden="true"></span>
+            Add Expense...
+        </a>  
+        <form class="navbar-form navbar-right" role="search" id="searchGo" >
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search..." id="search_query">
+            </div>
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>  Go!      
+            </button>
+        </form>
+                
+        </div>
+        </div>
+{% endblock top_nav %}
+
+
+{% block body %}
+
+    <div class="page-header">
+        <h1>
+           <span>{% block page_title %} {% endblock page_title %}   </span>
+           <span style="margin-left:50px;">{% block page_nav %} {% endblock page_nav %}   </span>
+           
+        </h1>        
+    </div>
+    
+    <div class="col-xs-10">
+        {% block main_content %} {% endblock main_content %}
+    </div>
+    
+    <div class="col-xs-2">    
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" id="sidebar-expenses">
+                <a href="{% url 'expenses:main_redirect' %}">
+                    <span class="glyphicon glyphicon-usd" style="padding-right:15px;" aria-hidden="true" id="side_bar_expenses"></span> Expenses
+                </a>
+            </li>
+            <li role="presentation" id="sidebar-balance"> 
+                <a href="{% url 'balance:main_redirect' %}"> 
+                    <span  class="glyphicon glyphicon-calendar" style="padding-right:15px;" aria-hidden="true"></span>Monthly Balance 
+                </a>
+            </li>
+            <li role="presentation" id="sidebar-settings">
+                <a href="{% url 'users:main_settings_redirect' %}">
+                   <span class="glyphicon glyphicon-user" style="padding-right:15px;" aria-hidden="true"></span>  Settings 
+                </a>
+            </li>
+            <li role="presentation" id="sidebar-how-to">
+                <a href="{% url 'intro' %}">
+                   <span class="glyphicon glyphicon-ok" style="padding-right:15px;" aria-hidden="true"></span>  How-To 
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+<div class="col-xs-10">
+    {% if paginate %}   
+        {% include "elements/pagination.html" %}        
+    {% endif %}           
+</div>
+
+{% endblock body %}

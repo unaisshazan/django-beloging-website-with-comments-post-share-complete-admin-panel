@@ -1,0 +1,103 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+{% load global_tags %}
+
+{% block sidebar_item %} "balance" {% endblock sidebar_item %}
+{% block page_title %} Clear Monthly Balance  {% endblock page_title %}
+
+{% block ready_script %} 
+    {{ block.super }}
+    redirect_url = "{% url 'balance:clear_changed' year month %}?changed-to=";
+    
+    {% if not DEMO %}
+        $("#save_balance").on("click",function(){ 
+            if ($("#change_to:checked").length>0)
+                {window.location.replace(redirect_url+"cleared");}
+            else
+                {window.location.replace(redirect_url+"not-cleared");}
+            });
+    {% endif %}
+{% endblock ready_script %}
+
+{% block main_content %}
+
+<div class="panel panel-primary">
+  <div class="panel-body panel-heading">
+    <h3 class="panel-title"> Balancing a Month: Agree to "close" a month, and pay each other the difference in costs. </h3>
+  </div>
+  <div class="panel-footer">
+    Once you clear a month, there are no further changes to expenses in this month. The expenses status is "locked",
+    assuming that you and your divorcee will clear the amount of the approved expenses.
+  </div>
+</div>
+
+<div class="col-xs-6">
+<h4> Approved Expenses for {{ balance.month_of_balance|intmonth }},{{ balance.year_of_balance }} </h4>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <td>My Expenses</td>
+            <td>{{  balance.user_sum|currencyformat }} <td>
+        </tr>
+        
+        </tr>
+            <td>Divorcee Participate</td>
+            <td>{{  balance.divorcee_participate|currencyformat }} <td>
+        </tr>
+        
+        <tr> 
+            <td>Divorcee Expenses</td>
+            <td>{{  balance.divorcee_sum|currencyformat }} <td>
+         </tr>
+         
+         <tr>
+            <td>My Participate</td>
+            <td>{{  balance.user_participate|currencyformat }} <td>
+         </tr>
+            
+        <tr style="font-weight:bold;" class="info">
+            <td>My Net Costs</td>
+            <td>{{  balance.user_net|currencyformat }} <td>
+        </tr>
+           
+          <tr>
+                <td>Divorcee Net Costs</td> 
+                 <td>{{  balance.divorcee_net|currencyformat }} <td>
+          </tr>
+          
+          </tbody>
+    
+    </table>
+    
+          
+      <div class="checkbox">
+            
+                    <label>
+                        <input id="change_to" type="checkbox" class="checkbox" {% if user_cleared %} checked {% endif %}>  
+                        <span style="font-size:large;"> I accept and clear this month </span>
+                    </label>
+            </div>    
+       <a href="{{ balance.balance_object.get_absolute_url }}" class="btn btn-danger" role="button"> Cancel </a>
+        <button id="save_balance" class="btn btn-success save"> Save </button>
+            
+            
+            
+            
+ 
+
+    
+</div>    
+<div class="col-xs-1"></div>
+<div class="col-xs-4">
+
+{% include "elements/balance_pay.html" %}<br>
+            <h4> <span class="label label-info p-r-10"> Balance Status </span></h4>                      
+            <h4> {{ me_cleared }} </h4>
+            <h4>  {{ divorcee_cleared}} </h4>
+    
+</div>
+
+
+
+{% endblock main_content %}

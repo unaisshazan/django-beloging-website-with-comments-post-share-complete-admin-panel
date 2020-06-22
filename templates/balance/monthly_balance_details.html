@@ -1,0 +1,74 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+{% load global_tags %}
+
+{% block sidebar_item %} "balance" {% endblock sidebar_item %}
+{% block page_title %} Monthly Balance  {% endblock page_title %}
+
+{% block page_nav %}
+    {% include "elements/dropdown_select_approved_balance.html" %}
+{% endblock page_nav %}
+
+{% block main_content %}
+<div class="col-xs-6">
+<h4> {{ balance.month_of_balance|intmonth }},{{ balance.year_of_balance }} </h4>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <td>My Expenses</td>
+            <td>{{  balance.user_sum|currencyformat }} <td>
+        </tr>
+        
+        </tr>
+            <td>Divorcee Participate</td>
+            <td>{{  balance.divorcee_participate|currencyformat }} <td>
+        </tr>
+        
+        <tr> 
+            <td>Divorcee Expenses</td>
+            <td>{{  balance.divorcee_sum|currencyformat }} <td>
+         </tr>
+         
+         <tr>
+            <td>My Participate</td>
+            <td>{{  balance.user_participate|currencyformat }} <td>
+         </tr>
+            
+        <tr style="font-weight:bold;" class="info">
+            <td>My Net Costs</td>
+            <td>{{  balance.user_net|currencyformat }} <td>
+        </tr>
+           
+          <tr>
+                <td>Divorcee Net Costs</td> 
+                 <td>{{  balance.divorcee_net|currencyformat }} <td>
+          </tr>
+          
+          </tbody>
+    
+    </table>
+    
+          
+          
+            
+            
+            
+            
+ <h4> <span class="label label-info p-r-10"> Balance Status </span></h4>           
+           
+            <h4> {{ me_cleared }} </h4>
+            <h4>  {{ divorcee_cleared}} </h4>
+            
+            {% if can_clear %}
+                <a href="{% url "balance:clear" year month %}" class="btn btn-primary pull-right" role="button"> Change Balance Status</a>
+            {% else %}
+                 <h4> <span class="label label-info p-r-10"> You can clear a month after it finishes </span></h4>
+            {% endif %}
+</div>    
+
+<div class="col-xs-1"></div>
+<div class="col-xs-5">
+    {% include "elements/balance_pay.html" %}
+</div>
+{% endblock main_content %}

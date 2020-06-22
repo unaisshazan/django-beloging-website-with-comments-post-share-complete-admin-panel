@@ -1,0 +1,53 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+{% load global_tags %}
+
+{% block sidebar_item %} "expenses" {% endblock sidebar_item %}
+{% block page_title %} Expense Details {% endblock page_title %} 
+{% block page_id  %} expense_details {% endblock page_id %}
+{% block main_content %}
+    
+    <div id="model_html">{{ model_html.styled }}</div>
+     <h4> <span class="label label-info p-r-10"> Approval Status</span>
+       <span class="panel panel-default" style="border:none;padding-left:10px;" id="approval_status"> 
+       {% if expense.is_approved %}  Approved {% else %}  Pending {% endif %}
+       </span>  </h4>
+    <h4> <span class="label label-info p-r-10">Month to Balance</span>
+        <span class="panel panel-default" style="border:none;padding-left:10px;"> 
+        {{ expense.month_balanced|intmonth }}, {{ expense.year_balanced }} </span> </h4>
+   
+<h4> <span class="label label-info p-r-10" id="update_status"> Update Status </span>
+<span class="panel panel-default" style="border:none;padding-left:10px;">
+    {% if expense.can_update %}
+    
+                {% if expense.owner == request.user %}
+                    {% if expense.is_approved %}                                
+                         Expense approved (no edits)                                               
+                    {% else %}                                
+                        <a href="{{ expense.get_edit_url }}" class="btn btn-default" role="button" id="edit_expense"> Edit Expense </a>
+                        <a href="{{ expense.get_delete_url }}" class="btn btn-default" role="button" id="delete_expense"> Delete Expense </a>
+                    {% endif %}
+        
+                {% else %}
+                    <a href="{{  expense.get_approve_url }}" class="btn btn-default" role="button" id="approve_expense"> Change approval status </a>
+                {% endif %}
+
+    {% else %}
+              {% if expense.is_approved %}
+                     Expanse approved, month is balanced  (no edits) 
+              {% else %}
+                       {% if expense.owner == request.user %}
+                                 The balanced month is already signed as "balance" without this expense. 
+                                 <p style="margin-top:15px;">
+                                <a href="{{ expense.get_change_month_balance_url }}" class="btn btn-default" role="button"> You can move expense to another unblanced month </a> 
+                                </p>
+                        {% else %}
+                              The balanced month is already signed as "balance" without this expense. 
+                        {% endif %}
+                        
+                {% endif %}   
+    {% endif %}
+</span></h4>
+
+{% endblock main_content %}
+

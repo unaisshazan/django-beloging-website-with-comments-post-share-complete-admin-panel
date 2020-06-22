@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="pull-right" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign-In</h4>
+      </div>
+      <form action='' method="POST" id="home_page_sign_in_form">
+                        <div class="modal-body">
+                    
+                            {% csrf_token %}
+                            <p>
+                              <label for="id_username">Username:</label> 
+                              <input id="id_username" maxlength="254" name="username" type="text" />
+                            </p>
+                            <p>
+                              <label for="id_password">Password:</label> 
+                              <input id="id_password" name="password" type="password" />
+                            </p>
+                            
+                            <a style="text-decoration:underline;color:blue;" href="{% url 'reset_password' %}"> Forgot Password? </a>
+                            
+                   
+                    </div>
+        
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <input type="submit" value="Login" class="btn btn-info"> 
+                      
+                    </div>
+                    </form>
+    </div>
+  </div>
+</div>

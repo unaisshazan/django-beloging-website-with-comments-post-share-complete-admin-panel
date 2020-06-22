@@ -1,0 +1,28 @@
+<div class="container">
+        <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home_page' %}">Divorce Calcs</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                        
+                         {% if request.path != '/sign-up/' %}
+                        <li class="menuItem">
+                        <a href="{% url 'sign_up_simple' %}" class="btn navbar-btn btn-danger" style="color:white;" role="button">Sign-Up</a>
+                        </li>
+                        {% endif  %}
+                        <li class="menuItem"><a href="{% url 'about_public' %}">About</a></li>
+                        <li class="menuItem"><a href="{% url 'home_page' %}#whatis">Benefits</a></li>
+                        <li class="menuItem"><a href="{% url 'home_page' %}#screen">Screenshot</a></li>
+                        <li class="menuItem"><a href="{% url 'login_simple' %}">Sign-In</a></li>
+                       
+                </ul>
+        </div>
+                   
+</div>

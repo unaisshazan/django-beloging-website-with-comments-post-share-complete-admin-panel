@@ -1,0 +1,82 @@
+{% extends "base_login.html" %}
+{% load static from staticfiles %}
+
+{% block sidebar_item %} "settings" {% endblock sidebar_item %}
+{% block page_title %} User Settings{% endblock page_title %} 
+    
+{% block main_content %}
+
+
+
+<form action="" method="POST" class="col-xs-6">
+<h4 > <span class="label label-info"> Details </span> </h4>
+    <p>
+    {{ form.send_mail_when_divorcee_approve }}
+    {{ form.send_mail_when_divorcee_approve.label_tag }}
+    {{ form.send_mail_when_divorcee_approve.errors }}
+    </p>
+    
+    <p>
+    {{ form.send_mail_when_divorcee_balance }}
+    {{ form.send_mail_when_divorcee_balance.label_tag }}
+    {{ form.send_mail_when_divorcee_balance.errors }}
+    </p>
+    
+    <p>
+    {{ form.user_email.label_tag }}
+    {{ form.user_email }}
+    {{ form.user_email.errors }}
+    
+    </p>
+    
+    <p>
+    {{ form.base_divorcee_participate.label_tag }}
+    {{ form.base_divorcee_participate }} 
+    {{ form.base_divorcee_participate.errors }}
+    You can change this value when actually entering the expense
+    </p>
+    
+
+   
+   
+   <h4 > <span class="label label-info"> Change password </span> </h4>
+   <p>
+    {{ form.password1.label_tag }}
+    {{ form.password1 }}
+    {{ form.password1.errors }}
+    leave blank if you don't want to change password
+    </p>
+    
+    <p>
+    {{ form.password2.label_tag }}
+    {{ form.password2 }}
+    {{ form.password2.errors }}
+     leave blank if you don't want to change password
+    </p>
+
+    {% csrf_token %}
+    
+    <a href="{% url "expenses:main_redirect" %}" class="btn btn-danger" role="button"> Cancel </a>
+    <input type="submit" value="Save" class="btn btn-success save"> 
+        
+</form>
+
+<div class="col-xs-6">
+<div class="panel panel-info">
+  <div class="panel-body panel-heading">
+    <h3 class="panel-title">
+    {% if request.user.divorcee %}    
+        Account Code
+    {% else %}
+        Invite divorcee to sign up with the following code:
+    {% endif %}
+    
+    
+    </h3>
+  </div>
+  <div class="panel-footer">
+    {{ request.user.account.account_code }}
+  </div>
+</div>
+</div>
+{% endblock main_content %}
